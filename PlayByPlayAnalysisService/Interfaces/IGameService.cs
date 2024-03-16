@@ -2,7 +2,7 @@
 {
     public interface IGameService
     {
-        List<string> GetAllActionsByPlayerName(string playerName);
         Dictionary<string, List<string>> GetAllPlayersNames();
+        List<string> GetAllActionsByPlayerName(string playerName);
     }
 }
