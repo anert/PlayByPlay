@@ -24,7 +24,6 @@ namespace PlayByPlayAnalysisService.Services
         public List<string> GetAllActionsByPlayerName(string playerName) => _gameAnalysisResult.RelevantActions
                 .Where(action => string.Equals(action.PlayerNameI, playerName, StringComparison.OrdinalIgnoreCase))
                 .Select(action => action.ActionType)
-                .Distinct()
                 .ToList();
     }
 }
