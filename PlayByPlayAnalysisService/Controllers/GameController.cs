@@ -5,14 +5,9 @@ namespace PlayByPlayAnalysisService.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class GameController : ControllerBase
+    public class GameController(IGameService gameService) : ControllerBase
     {
-        private readonly IGameService _gameService;
-
-        public GameController(IGameService gameService)
-        {
-            _gameService = gameService;
-        }
+        private readonly IGameService _gameService = gameService;
 
         [HttpGet("players")]
         public IActionResult GetAllPlayersNames()
