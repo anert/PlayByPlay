@@ -23,7 +23,6 @@ namespace PlayByPlayAnalysisService.Services
             var firstScoringTeamTricode = firstScoringAction?.TeamTricode;
             var isFirstScoringTeamHosting = firstScoringAction?.ScoreHome != 0;
 
-            // Define constants for team affiliations
             const string Home = "home";
             const string Away = "away";
 
