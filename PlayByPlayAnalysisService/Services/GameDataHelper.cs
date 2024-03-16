@@ -12,8 +12,8 @@ namespace PlayByPlayAnalysisService.Services
         /// <exception cref="InvalidOperationException">Thrown when the first scoring action cannot be determined.</exception>
         public static Dictionary<string, List<string>> GetAllPlayersNames(IEnumerable<GameAction> actions)
         {
-            // Retrieve the first scoring action
-            var firstScoringAction = GetFirstBasketAction();
+          
+            var firstScoringAction = GetFirstScoringAction();
             if (firstScoringAction == null)
             {
                 throw new InvalidOperationException("Cannot determine first scoring action");
@@ -36,13 +36,13 @@ namespace PlayByPlayAnalysisService.Services
                     group => group.Select(x => x.PlayerNameI).Distinct().ToList()
                 );
 
+            GameAction? GetFirstScoringAction() => actions.OrderBy(action => action.ActionNumber)
+             .FirstOrDefault(action => !string.IsNullOrEmpty(action.ShotResult) && action.ShotResult.Equals("Made"));
+
             // Maps the team tricode to the corresponding team affiliation
             string MapGroupForAction(string teamTricode) => teamTricode.Equals(firstScoringTeamTricode) ?
                 isFirstScoringTeamHosting ? Home : Away : isFirstScoringTeamHosting ? Away : Home;
 
-            // Retrieves the first basket action
-            GameAction? GetFirstBasketAction() => actions.OrderBy(action => action.ActionNumber)
-                .FirstOrDefault(action => !string.IsNullOrEmpty(action.ShotResult) && action.ShotResult.Equals("Made"));
         }
     }
 }
