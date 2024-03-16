@@ -1,8 +1,5 @@
 using PlayByPlayAnalysisService.Models;
 using PlayByPlayAnalysisService.Services;
-using System.Collections.Generic;
-using System.Linq;
-using Xunit;
 
 namespace PlayByPlayAnalysisService.Tests
 {
@@ -10,8 +7,7 @@ namespace PlayByPlayAnalysisService.Tests
     {
         [Fact]
         public void GetAllPlayersNames_ShouldReturnCorrectPlayerNames()
-        {
-            // Arrange
+        {   
             var actions = new List<GameAction>
                 {
                     new GameAction("actionType", 1, 1, "James Harden", "HOU", "Made",1),
@@ -22,10 +18,8 @@ namespace PlayByPlayAnalysisService.Tests
                     new GameAction("actionType", 6, 6, "Dwight Howard", "LAL", null, 1)
                 };
 
-            // Act
             var result = GameDataHelper.GetAllPlayersNames(actions);
 
-            // Assert
             Assert.Equal(2, result.Count);
             Assert.Equal(3, result["home"].Count);
             Assert.Equal(3, result["away"].Count);
@@ -41,7 +35,6 @@ namespace PlayByPlayAnalysisService.Tests
         [Fact]
         public void GetAllPlayersNames_ShouldReturnCorrectPlayerNamesAway()
         {
-            // Arrange
             var actions = new List<GameAction>
                 {
                     new GameAction("actionType", 1, 1, "James Harden", "HOU", "Made",0),
@@ -52,10 +45,9 @@ namespace PlayByPlayAnalysisService.Tests
                     new GameAction("actionType", 6, 6, "Dwight Howard", "LAL", null, 0)
                 };
 
-            // Act
+       
             var result = GameDataHelper.GetAllPlayersNames(actions);
 
-            // Assert
             Assert.Equal(2, result.Count);
             Assert.Equal(3, result["home"].Count);
             Assert.Equal(3, result["away"].Count);
@@ -70,7 +62,6 @@ namespace PlayByPlayAnalysisService.Tests
         [Fact]
         public void GetAllPlayersNames_ShouldReturnEmptyDictionary_WhenNoActions()
         {
-            // Arrange
             var actions = new List<GameAction>();
 
             Assert.Throws<InvalidOperationException>(() => GameDataHelper.GetAllPlayersNames(actions));
@@ -79,7 +70,6 @@ namespace PlayByPlayAnalysisService.Tests
         [Fact]
         public void GetAllPlayersNames_ShouldFail_WhenNoScoringAction()
         {
-            // Arrange
             var actions = new List<GameAction>
                 {
                     new GameAction("actionType", 1, 0, "James Harden", "HOU", "James Harden", 0),
@@ -87,9 +77,6 @@ namespace PlayByPlayAnalysisService.Tests
                 };
 
             Assert.Throws<InvalidOperationException>(() => GameDataHelper.GetAllPlayersNames(actions));
-
-       
-       
         }
     }
 }
