@@ -14,14 +14,14 @@ namespace PlayByPlayAnalysisService.Controllers
             _gameService = gameService;
         }
 
-        [HttpGet("GetAllPlayersNames")]
+        [HttpGet("players")]
         public IActionResult GetAllPlayersNames()
         {
             var result = _gameService.GetAllPlayersNames();
             return Ok(result);
         }
 
-        [HttpGet("GetAllActionsByPlayerName/{playerName}")]
+        [HttpGet("{playerName}/actions")]
         public IActionResult GetAllActionsByPlayerName(string playerName)
         {
             var result = _gameService.GetAllActionsByPlayerName(playerName);
