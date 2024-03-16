@@ -36,13 +36,13 @@ namespace PlayByPlayAnalysisService.Services
                     group => group.Select(x => x.PlayerNameI).Distinct().ToList()
                 );
 
+            // Retrieves the first scoring action (Ordering by action number just in case)
             GameAction? GetFirstScoringAction() => actions.OrderBy(action => action.ActionNumber)
              .FirstOrDefault(action => !string.IsNullOrEmpty(action.ShotResult) && action.ShotResult.Equals("Made"));
 
             // Maps the team tricode to the corresponding team affiliation
             string MapGroupForAction(string teamTricode) => teamTricode.Equals(firstScoringTeamTricode) ?
                 isFirstScoringTeamHosting ? Home : Away : isFirstScoringTeamHosting ? Away : Home;
-
         }
     }
 }
