@@ -40,7 +40,7 @@ namespace PlayByPlayAnalysisService.Services
             string MapGroupForAction(string teamTricode) => teamTricode.Equals(firstScoringTeamTricode) ?
                 isFirstScoringTeamHosting ? Home : Away : isFirstScoringTeamHosting ? Away : Home;
 
-            // Retrieves the first basket action
+            // Retrieves the first basket action (Ordering by action number just in case)
             GameAction? GetFirstBasketAction() => actions.OrderBy(action => action.ActionNumber)
                 .FirstOrDefault(action => !string.IsNullOrEmpty(action.ShotResult) && action.ShotResult.Equals("Made"));
         }
